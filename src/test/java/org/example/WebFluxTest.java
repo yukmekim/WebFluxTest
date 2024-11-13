@@ -32,7 +32,7 @@ class WebFluxTest {
 
     private static final int NUMBER_OF_REQUESTS = 100; // 동시 요청수
     private static final String THREE_SECONDS_URL = "http://localhost:8099/api/v2/webFluxApi/testFlux";
-    private static final String TEST_MVC_URL = "http://localhost:8099/api/v2/mvcApi/helloMvc";
+    private static final String TEST_MVC_URL = "http://localhost:8099/api/v2/mvc/helloMvc";
 
     @Test
     @DisplayName("RestTemplate 응답 시간 테스트")
@@ -96,7 +96,7 @@ class WebFluxTest {
 
         for (int i = 0; i < NUMBER_OF_REQUESTS; i++) {
             webClient.get()
-                    .uri("/api/v2/webFluxApi/helloWebFlux") // 상대 URI 사용
+                    .uri("/api/v2/webFlux/helloWebFlux") // 상대 URI 사용
                     .retrieve()
                     .bodyToMono(String.class)
                     .doOnTerminate(countDownLatch::countDown) // 요청 완료 시 카운트 다운

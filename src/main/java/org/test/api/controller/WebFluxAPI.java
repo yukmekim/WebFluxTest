@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v2/webFluxApi")
+@RequestMapping("/api/v2/webFlux")
 public class WebFluxAPI {
 
     @GetMapping("/testFlux")
