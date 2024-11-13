@@ -1,0 +1,43 @@
+server:
+  port: 8099
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  tomcat:
+    max-connections: 10000
+    accept-count: 1000
+    threads:
+      max: 3000
+      min-spare: 1000
+
+spring:
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/main/
+    suffix: .html
+
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://dev.portdemo.com:3306/dev_port
+#    username: port_user
+#    password: port_pass!2#
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#
+#    properties:
+#      hibernate:
+#        format_sql: true
+#
+#    open-in-view: false
+
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        SQL: debug
