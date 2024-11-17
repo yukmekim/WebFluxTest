@@ -20,24 +20,25 @@ spring:
     prefix: classpath:/main/
     suffix: .html
 
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://dev.portdemo.com:3306/dev_port
-#    username: port_user
-#    password: port_pass!2#
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#
-#    properties:
-#      hibernate:
-#        format_sql: true
-#
-#    open-in-view: false
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/dev_replica
+    username: replica_user
+    password: replica_pass!2#
 
-#logging:
-#  level:
-#    org:
-#      hibernate:
-#        SQL: debug
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+
+    open-in-view: false
+    show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug

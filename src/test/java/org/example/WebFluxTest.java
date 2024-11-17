@@ -106,7 +106,7 @@ class WebFluxTest {
         }
 
         countDownLatch.await(); // 모든 요청이 완료될 때까지 대기
-        stopWatch.stop();
-        System.out.println("Total time: " + stopWatch.getTotalTimeSeconds() + " seconds");
+        stopWatch.stop();  // 측정 종료
+        System.out.println("Total time: " + stopWatch.getTotalTimeSeconds() + " seconds"); // 소요 시간 출력
     }
 }
