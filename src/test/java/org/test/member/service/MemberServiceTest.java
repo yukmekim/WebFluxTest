@@ -25,32 +25,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class MemberServiceTest {
 
-    private final MemberService memberService;
-
-    private final MemberRepository memberRepository;
-
-    public MemberServiceTest(MemberService memberService, MemberRepository memberRepository) {
-        this.memberService = memberService;
-        this.memberRepository = memberRepository;
-    }
-
-//    @BeforeEach
-//    public void setMemberService() {
-//        memberService = new MemberService(memberRepository);
+//    private final MemberService memberService;
+//
+//    private final MemberRepository memberRepository;
+//
+//    public MemberServiceTest(MemberService memberService, MemberRepository memberRepository) {
+//        this.memberService = memberService;
+//        this.memberRepository = memberRepository;
 //    }
+
+    @MockBean
+    private MemberRepository memberRepository;
+
+    private MemberService memberService;
+
+    @BeforeEach
+    public void setMemberService() {
+        memberService = new MemberService(memberRepository);
+    }
 
     @Test
     void getUserById() {
-        //Member member = new Member("sixman", "TENANT_000000000001", "6666","육장훈");
-        //Mockito.when(memberRepository.findByMemberId("sixman")).thenReturn(Optional.of(member));
+        Member member = new Member("sixman", "TENANT_000000000001", "6666","육장훈");
+        Mockito.when(memberRepository.findByMemberId("sixman")).thenReturn(Optional.of(member));
 
         // When
-        //Optional<Member> result = memberService.getUserByName("sixman");
-
-        Member member = new Member("sixman", "TENANT_000000000001", "6666","육장훈");
-        //memberRepository.save(member);
-
         Optional<Member> result = memberService.getUserById("sixman");
+
+//        Member member = new Member("sixman", "TENANT_000000000001", "6666","육장훈");
+//        memberRepository.save(member);
+//
+//        Optional<Member> result = memberService.getUserById("sixman");
 
         // Then
         assertThat(result).isPresent();
