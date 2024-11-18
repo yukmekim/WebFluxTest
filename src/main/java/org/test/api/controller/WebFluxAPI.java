@@ -7,30 +7,39 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.test.member.entity.Member;
+import org.test.member.service.MemberService;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v2/webFlux")
 public class WebFluxAPI {
 
-    @GetMapping("/testFlux")
-    public ResponseEntity<Response> testFlux() {
-        HttpHeaders header = new HttpHeaders();
-        header.setContentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8));
+    private final MemberService memberService;
 
-        Response response = Response.builder()
-                .status(StatusEnum.OK)
-                .message("success")
-                .build();
-
-        return new ResponseEntity<>(response, header, HttpStatus.OK);
+    public WebFluxAPI(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @GetMapping("/helloWebFlux")
     public Mono<Map<String, String>> helloWebFlux() {
-        return Mono.just(Map.of("status", "200"));
+        return Mono.just(Map.of("status", "OK"));
+    }
+
+    @GetMapping("/webFluxData")
+    public Mono<Response> webFluxData(final String id) {
+        Optional<Member> result = Optional.of(memberService.getUserById(id).orElse(new Member()));
+
+        Response response = Response.builder()
+                .status(StatusEnum.OK)
+                .message("success")
+                .data(result)
+                .build();
+
+        return Mono.just(response);
     }
 }
